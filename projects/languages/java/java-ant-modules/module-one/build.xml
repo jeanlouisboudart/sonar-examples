@@ -1,10 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="Module One" default="all" basedir=".">
+<project name="Module One" default="all" basedir="." xmlns:sonar="antlib:org.sonar.ant">
 
   <echo>Module One</echo>
 
   <property name="build.dir" value="build" />
   <property name="classes.dir" value="${build.dir}/bin" />
+
+  <taskdef uri="antlib:org.sonar.ant" resource="org/sonar/ant/antlib.xml">
+
+    <!-- 
+    
+        PATH MUST BE REPLACED :
+        
+    -->
+    <classpath path="PATH/TO/sonar-ant-task.jar"/>
+  </taskdef>
+
 
   <!-- 
   
@@ -33,6 +44,11 @@
     <javac destdir="${classes.dir}" classpathref="classpath" fork="true" debug="true" includeAntRuntime="false">
       <src path="src/java" />
     </javac>
+  </target>
+
+  <target name="sonar">
+    <mkdir dir=".sonar"/>
+    <sonar:project-definition file=".sonar/module-one-sonar.xml" key="module-one" version="1.0"/>
   </target>
 
   <target name="all"

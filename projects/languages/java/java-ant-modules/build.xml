@@ -27,7 +27,10 @@
   <property name="sonar.modules" value="module-one/build.xml,module-two/build.xml"/>
 
   <target name="sonar">
+    <ant dir="module-one" target="sonar"/>
+    <ant dir="module-two" target="sonar"/>
     <sonar:sonar key="my:project" version="0.1-SNAPSHOT">
+       <submodules dir="${basedir}" includes="**/*-sonar.xml"/>
     </sonar:sonar>
   </target>
 
